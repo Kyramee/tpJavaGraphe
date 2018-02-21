@@ -13,24 +13,25 @@ public class Paint extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private JPanel panelDessin;
-	private JToolBar outilsBar;
-	private JMenuBar menuBar;
+	private PanDessin panelDessin;
+	private OutilsBarre outilsBar;
+	private BarreMenu menuBar;
 
 	public Paint() {
 		super("Paint");
 		setSize(800, 600);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		
 		ImageIcon iconeFenetre = new ImageIcon("src/images/Logo.png");
 		setIconImage(iconeFenetre.getImage());
 		
-		menuBar = new BarreMenu();
-		outilsBar = new OutilsBarre();
-		panelDessin = new ZoneDessin();
-		getContentPane().add( panelDessin );
-		setJMenuBar( menuBar );
-		add( outilsBar, BorderLayout.SOUTH );
+		this.menuBar = new BarreMenu();
+		this.panelDessin = new PanDessin();
+		this.outilsBar = new OutilsBarre(this.panelDessin);
+		getContentPane().add( this.panelDessin );
+		setJMenuBar( this.menuBar );
+		add( this.outilsBar, BorderLayout.SOUTH );
 	}
 	
 	public static void main(String[] args) {
