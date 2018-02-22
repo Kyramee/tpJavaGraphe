@@ -32,6 +32,14 @@ public class OutilsBarre extends JToolBar {
 	public JToggleButton[] getTabJBsceau() {
 		return this.tabSceau;
 	}
+	
+	public ButtonGroup getGroupFormeRemplissage() {
+		return this.groupCouleurRemplissage;
+	}
+	
+	public ButtonGroup getGroupCouleurTrait() {
+		return this.groupCouleurTrait;
+	}
 
 	public void insertionBoutons() {
 		
@@ -49,7 +57,7 @@ public class OutilsBarre extends JToolBar {
 			tabForme[i].setToolTipText( tabNomForme[i] );
 			tabForme[i].addActionListener(ecouteur);
 		}
-
+		
 		for ( JToggleButton jToggleButton : tabForme ) {
 			groupForme.add( jToggleButton );
 			add( jToggleButton );

@@ -53,8 +53,10 @@ public class PanDessin extends JPanel implements MouseListener, MouseMotionListe
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		this.liste.get(this.liste.size() - 1).setParametre(this.premierClic.getX(), e.getX(), this.premierClic.getY(), e.getY());
-		this.repaint();
+		if ( !this.liste.isEmpty() ) {
+			this.liste.get(this.liste.size() - 1).setParametre(this.premierClic.getX(), e.getX(), this.premierClic.getY(), e.getY());
+			this.repaint();
+		}
 	}
 
 	@Override

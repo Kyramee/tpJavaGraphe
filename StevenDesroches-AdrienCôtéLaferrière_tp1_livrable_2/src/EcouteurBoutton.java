@@ -17,11 +17,13 @@ public class EcouteurBoutton implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		boolean go = true;
 		JToggleButton[] tab = this.ob.getTabJBcouleur();
-
+		
 		for (int i = 0; i < tab.length; i++) {
 			if (e.getSource() == tab[i]) {
 				setCouleurContour(i);
 				go = false;
+				this.pd.setRemplissage( Color.WHITE );
+				ob.getGroupFormeRemplissage().clearSelection();
 				break;
 			}
 		}
@@ -33,6 +35,8 @@ public class EcouteurBoutton implements ActionListener {
 				if (e.getSource() == tab[i]) {
 					setCouleurRemplissage(i);
 					go = false;
+					this.pd.setContour( Color.WHITE );
+					ob.getGroupCouleurTrait().clearSelection();
 					break;
 				}
 			}
@@ -45,6 +49,7 @@ public class EcouteurBoutton implements ActionListener {
 				if (e.getSource() == tab[i]) {
 					setForme(i);
 					go = false;
+
 					break;
 				}
 			}
