@@ -14,12 +14,12 @@ public class PanDessin extends JPanel implements MouseListener, MouseMotionListe
 	static final int AUCUN = 3;
 	
 	private Color Fg, Bg;
+	
 	private int formeCourante;
 	
 	private MouseEvent premierClic;
 	
 	private ArrayList<Forme> liste;
-	private Forme temp = null;
 	
 	public PanDessin() {
 		this.Fg = Color.WHITE;
@@ -27,6 +27,8 @@ public class PanDessin extends JPanel implements MouseListener, MouseMotionListe
 		this.formeCourante = this.AUCUN;
 		this.premierClic = null;
 		this.liste = new ArrayList<>();
+		this.addMouseListener(this);
+		this.addMouseMotionListener(this);
 	}
 	
 	public void setContour(Color c) {
@@ -43,28 +45,46 @@ public class PanDessin extends JPanel implements MouseListener, MouseMotionListe
 	
 	@Override
 	public void paintComponent(Graphics g) {
-		Rectangle r = new Rectangle(10, 20, 10, 25, Color.RED, Color.RED);
-		r.tracer(g);
+		super.paintComponent(g);
+		for (Forme forme : liste) {
+			forme.tracer(g);
+		}
 	}
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
-
+		this.liste.get(this.liste.size() - 1).setParametre(this.premierClic.getX(), e.getX(), this.premierClic.getY(), e.getY());
+		this.repaint();
 	}
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
-		
+	
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-
+		
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-
+		this.premierClic = e;
+		
+		switch (this.formeCourante) {
+		case RECT:
+			this.liste.add(new Rectangle(e.getX(), e.getY(), this.Fg, this.Bg));
+			break;
+			
+		case OVAL:
+			this.liste.add(new Ovale(e.getX(), e.getY(), this.Fg, this.Bg));
+			break;
+			
+		case TRAIT:
+			this.liste.add(new Trait(e.getX(), e.getY(), this.Fg));
+		default:
+			break;
+		}
 	}
 
 	@Override

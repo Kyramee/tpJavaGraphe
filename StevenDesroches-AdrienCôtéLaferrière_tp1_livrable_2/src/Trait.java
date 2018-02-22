@@ -4,9 +4,10 @@ import java.awt.Graphics;
 public class Trait extends Forme {
 	private int x2, y2;
 	
-	public Trait(int x1, int x2, int y1, int y2, Color contour) {
+	public Trait(int x1, int y1, Color contour) {
 		//REMPLIASSAGE NON UTILISER DONC LAISSER NULL
-		setParametre(x1, x2, y1, y2);
+		super.setX1(x1);
+		super.setY1(y1);
 		super.setContour(contour);
 	}
 	
