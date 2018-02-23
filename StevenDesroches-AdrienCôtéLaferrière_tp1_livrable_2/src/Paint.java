@@ -2,9 +2,6 @@ import java.awt.BorderLayout;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JMenuBar;
-import javax.swing.JPanel;
-import javax.swing.JToolBar;
 
 public class Paint extends JFrame {
 	

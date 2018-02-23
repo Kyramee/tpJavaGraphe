@@ -10,7 +10,8 @@ public class OutilsBarre extends JToolBar {
 	private final String[] tabNomForme = { "Carré", "Trait", "Ovale" };
 
 	private ButtonGroup groupCouleurTrait, groupCouleurRemplissage, groupForme;
-	private JToggleButton[] tabButtcouleurs = new JToggleButton[6], tabForme = new JToggleButton[3],
+	private JToggleButton[] tabButtcouleurs = new JToggleButton[6], 
+			tabForme = new JToggleButton[3],
 			tabSceau = new JToggleButton[6];
 	
 	private PanDessin pd;

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
+@SuppressWarnings("serial")
 public class PanDessin extends JPanel implements MouseListener, MouseMotionListener {
 	static final int TRAIT = 1;
 	static final int RECT = 0;
@@ -24,7 +25,7 @@ public class PanDessin extends JPanel implements MouseListener, MouseMotionListe
 	public PanDessin() {
 		this.Fg = Color.WHITE;
 		this.Bg = Color.WHITE;
-		this.formeCourante = this.AUCUN;
+		this.formeCourante = AUCUN;
 		this.premierClic = null;
 		this.liste = new ArrayList<>();
 		this.addMouseListener(this);
@@ -87,6 +88,7 @@ public class PanDessin extends JPanel implements MouseListener, MouseMotionListe
 		default:
 			break;
 		}
+		this.repaint();
 	}
 
 	@Override

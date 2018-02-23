@@ -7,6 +7,7 @@ import javax.swing.JToggleButton;
 public class EcouteurBoutton implements ActionListener {
 	private OutilsBarre ob;
 	private PanDessin pd;
+	private final Color[] tabColor = {Color.BLUE, Color.RED, Color.GREEN, Color.BLACK, Color.GRAY, Color.PINK};
 
 	public EcouteurBoutton(OutilsBarre ob, PanDessin pd) {
 		this.ob = ob;
@@ -20,10 +21,10 @@ public class EcouteurBoutton implements ActionListener {
 		
 		for (int i = 0; i < tab.length; i++) {
 			if (e.getSource() == tab[i]) {
-				setCouleurContour(i);
+				this.pd.setContour(this.tabColor[i]);
 				go = false;
 				this.pd.setRemplissage( Color.WHITE );
-				ob.getGroupFormeRemplissage().clearSelection();
+				this.ob.getGroupFormeRemplissage().clearSelection();
 				break;
 			}
 		}
@@ -33,10 +34,10 @@ public class EcouteurBoutton implements ActionListener {
 
 			for (int i = 0; i < tab.length; i++) {
 				if (e.getSource() == tab[i]) {
-					setCouleurRemplissage(i);
+					this.pd.setRemplissage(this.tabColor[i]);
 					go = false;
-					this.pd.setContour( Color.WHITE );
-					ob.getGroupCouleurTrait().clearSelection();
+					this.pd.setContour(this.tabColor[i]);
+					this.ob.getGroupCouleurTrait().clearSelection();
 					break;
 				}
 			}
@@ -47,73 +48,12 @@ public class EcouteurBoutton implements ActionListener {
 
 			for (int i = 0; i < tab.length; i++) {
 				if (e.getSource() == tab[i]) {
-					setForme(i);
+					this.pd.setForme(i);
 					go = false;
 
 					break;
 				}
 			}
-		}
-	}
-
-	public void setCouleurContour(int index) {
-
-		switch (index) {
-		case 0:
-			this.pd.setContour(Color.BLUE);
-			break;
-		case 1:
-			this.pd.setContour(Color.RED);
-			break;
-		case 2:
-			this.pd.setContour(Color.GREEN);
-			break;
-		case 3:
-			this.pd.setContour(Color.BLACK);
-			break;
-		case 4:
-			this.pd.setContour(Color.GRAY);
-			break;
-		case 5:
-			this.pd.setContour(Color.PINK);
-			break;
-		}
-	}
-
-	public void setCouleurRemplissage(int index) {
-		switch (index) {
-		case 0:
-			this.pd.setRemplissage(Color.BLUE);
-			break;
-		case 1:
-			this.pd.setRemplissage(Color.RED);
-			break;
-		case 2:
-			this.pd.setRemplissage(Color.GREEN);
-			break;
-		case 3:
-			this.pd.setRemplissage(Color.BLACK);
-			break;
-		case 4:
-			this.pd.setRemplissage(Color.GRAY);
-			break;
-		case 5:
-			this.pd.setRemplissage(Color.PINK);
-			break;
-		}
-	}
-
-	public void setForme(int index) {
-		switch (index) {
-		case 0:
-			this.pd.setForme(PanDessin.RECT);
-			break;
-		case 1:
-			this.pd.setForme(PanDessin.TRAIT);
-			break;
-		case 2:
-			this.pd.setForme(PanDessin.OVAL);
-			break;
 		}
 	}
 }

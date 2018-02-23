@@ -8,6 +8,8 @@ public class Trait extends Forme {
 		//REMPLIASSAGE NON UTILISER DONC LAISSER NULL
 		super.setX1(x1);
 		super.setY1(y1);
+		this.x2 = x1;
+		this.y2 = y1;
 		super.setContour(contour);
 	}
 	
