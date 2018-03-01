@@ -89,12 +89,12 @@ public class PanDessin extends JPanel implements MouseListener, MouseMotionListe
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
-	
+		//Rien à voir ici
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		
+		//Rien à voir ici
 	}
 
 	@Override
@@ -125,16 +125,16 @@ public class PanDessin extends JPanel implements MouseListener, MouseMotionListe
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-
+		//Rien à voir ici
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		
+		//Rien à voir ici
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		
+		//Rien à voir ici
 	}
 }

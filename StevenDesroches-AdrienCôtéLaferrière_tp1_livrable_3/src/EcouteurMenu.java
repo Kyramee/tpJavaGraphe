@@ -48,7 +48,7 @@ public class EcouteurMenu implements ActionListener {
 	public void actionListe(int index) {
 		switch (index) {
 		case 0:
-			if (!this.pd.isSauvegarder() && JOptionPane.showConfirmDialog(null,
+			if (!this.pd.isSauvegarder() && JOptionPane.showConfirmDialog(this.pd,
 					" la feuille de dessin en cours n’a pas encore été sauvegardée\nVoulez-vous enregistrer?",
 					"Système", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == JOptionPane.YES_OPTION) {
 				FileNameEmpty();
@@ -67,18 +67,27 @@ public class EcouteurMenu implements ActionListener {
 			Ouvrir();
 			break;
 		case 4:
-			int rep = JOptionPane.showConfirmDialog(null, "Ètes-vous sure de vouloir fermer l'application?",
+			int rep = JOptionPane.showConfirmDialog(this.pd, "Ètes-vous sure de vouloir fermer l'application?",
 					"Fermeture de l'application", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 			if (rep == JOptionPane.YES_OPTION) {
-				JOptionPane.showMessageDialog(null, "À la prochaine", "Système", JOptionPane.PLAIN_MESSAGE);
+				JOptionPane.showMessageDialog(this.pd, "À la prochaine", "Système", JOptionPane.PLAIN_MESSAGE);
 				System.exit(0);
 			}
 			break;
 		case 5:
-
+			JOptionPane.showMessageDialog(this.pd, "Crier très fort!!!!!", "Système", JOptionPane.INFORMATION_MESSAGE);
+			if(JOptionPane.showConfirmDialog(this.pd, "Est-ce que vous vous sentez mieux?", "Système", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+				JOptionPane.showMessageDialog(this.pd, "Bon dessinage!!!!!", "Système", JOptionPane.PLAIN_MESSAGE);
+			} else {
+				JOptionPane.showMessageDialog(this.pd, "Réesseyer!!!!!", "Système", JOptionPane.PLAIN_MESSAGE);
+			}
+			
 			break;
 		case 6:
-
+			JOptionPane.showMessageDialog(this.pd,
+					"Auteur: Adrien Côté-Laferrière\n"
+							+ "Auteur: Steven Desroches\nNom de logiciel: Paint\nVersion: 1.0.3",
+					"À propos de Paint", JOptionPane.INFORMATION_MESSAGE);
 			break;
 		default:
 			break;
@@ -98,7 +107,7 @@ public class EcouteurMenu implements ActionListener {
 	public void sauvegarder() {
 		try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(this.pd.getFileName()))) {
 			oos.writeObject(this.pd);
-			JOptionPane.showMessageDialog(null, "Painture sauvegardé", "Système", JOptionPane.PLAIN_MESSAGE);
+			JOptionPane.showMessageDialog(this.pd, "Painture sauvegardé", "Système", JOptionPane.PLAIN_MESSAGE);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -117,7 +126,7 @@ public class EcouteurMenu implements ActionListener {
 
 	public void Ouvrir() {
 		JFileChooser choix = new JFileChooser();
-		if (choix.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+		if (choix.showOpenDialog(this.pd) == JFileChooser.APPROVE_OPTION) {
 			try (ObjectInputStream ois = new ObjectInputStream(
 					new FileInputStream(choix.getSelectedFile().getAbsolutePath()))) {
 				this.pd.setListeForme(((PanDessin) ois.readObject()).getListeForme());
