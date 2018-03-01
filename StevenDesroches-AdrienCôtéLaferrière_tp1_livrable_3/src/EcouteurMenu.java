@@ -6,6 +6,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JOptionPane;
 
@@ -13,11 +14,13 @@ public class EcouteurMenu implements ActionListener {
 	private JMenu menuFichier;
 	private JMenu menuAide;
 	private PanDessin pd;
+	private JFrame f;
 
-	public EcouteurMenu(JMenu ficher, JMenu aide, PanDessin pd) {
+	public EcouteurMenu(JMenu ficher, JMenu aide, PanDessin pd, JFrame f) {
 		this.menuFichier = ficher;
 		this.menuAide = aide;
 		this.pd = pd;
+		this.f = f;
 	}
 
 	@Override
@@ -99,7 +102,7 @@ public class EcouteurMenu implements ActionListener {
 		if (choix.showSaveDialog(this.pd) == JFileChooser.APPROVE_OPTION) {
 			String file = choix.getSelectedFile().getAbsolutePath();
 			this.pd.setFileName((file.matches(".*\\.pnt$")) ? file : file + ".pnt");
-
+			this.f.setTitle("Paint" + this.pd.getFileName());
 			sauvegarder();
 		}
 	}
@@ -108,7 +111,6 @@ public class EcouteurMenu implements ActionListener {
 		try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(this.pd.getFileName()))) {
 			oos.writeObject(this.pd);
 			JOptionPane.showMessageDialog(this.pd, "Painture sauvegardé", "Système", JOptionPane.PLAIN_MESSAGE);
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -127,12 +129,22 @@ public class EcouteurMenu implements ActionListener {
 	public void Ouvrir() {
 		JFileChooser choix = new JFileChooser();
 		if (choix.showOpenDialog(this.pd) == JFileChooser.APPROVE_OPTION) {
-			try (ObjectInputStream ois = new ObjectInputStream(
-					new FileInputStream(choix.getSelectedFile().getAbsolutePath()))) {
-				this.pd.setListeForme(((PanDessin) ois.readObject()).getListeForme());
-			} catch (Exception e) {
-				e.printStackTrace();
+			if (choix.getSelectedFile().getAbsolutePath().matches(".*\\.pnt$")) {
+				try (ObjectInputStream ois = new ObjectInputStream(
+						new FileInputStream(choix.getSelectedFile().getAbsolutePath()))) {
+					Object ob = ois.readObject();
+					this.pd.setListeForme(((PanDessin) ob).getListeForme());
+					this.pd.setFileName(((PanDessin) ob).getFileName());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				String[] split = this.pd.getFileName().split("\\\\");
+				String fName = "Paint - " + split[split.length - 1];
+				this.f.setTitle("Paint" + fName);
+			} else {
+				JOptionPane.showMessageDialog(this.pd, "Ce fichier n'est pas supporté par Paint", "Système", JOptionPane.ERROR_MESSAGE);
 			}
+			
 		}
 	}
 }

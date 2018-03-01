@@ -1,5 +1,6 @@
 import java.awt.event.KeyEvent;
 
+import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -11,11 +12,11 @@ public class BarreMenu extends JMenuBar {
 	private JMenu menuFichier;
 	private JMenu menuAide;
 
-	public BarreMenu(PanDessin pd) {
+	public BarreMenu(PanDessin pd, JFrame f) {
 		super();
 		menuFichier();
 		menuAide();
-		EcouteurMenu em = new EcouteurMenu(this.menuFichier, this.menuAide, pd);
+		EcouteurMenu em = new EcouteurMenu(this.menuFichier, this.menuAide, pd, f);
 		ecouter(this.menuFichier, em);
 		ecouter(this.menuAide, em);
 		this.add(menuFichier);

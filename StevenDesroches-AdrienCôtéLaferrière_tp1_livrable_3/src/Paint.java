@@ -24,7 +24,7 @@ public class Paint extends JFrame {
 		this.setIconImage(iconeFenetre.getImage());
 		
 		this.panelDessin = new PanDessin();
-		this.menuBar = new BarreMenu(this.panelDessin);
+		this.menuBar = new BarreMenu(this.panelDessin, this);
 		this.outilsBar = new OutilsBarre(this.panelDessin);
 		this.getContentPane().add( this.panelDessin );
 		this.setJMenuBar( this.menuBar );
