@@ -11,10 +11,13 @@ public class BarreMenu extends JMenuBar {
 	private JMenu menuFichier;
 	private JMenu menuAide;
 
-	public BarreMenu() {
+	public BarreMenu(PanDessin pd) {
 		super();
 		menuFichier();
 		menuAide();
+		EcouteurMenu em = new EcouteurMenu(this.menuFichier, this.menuAide, pd);
+		ecouter(this.menuFichier, em);
+		ecouter(this.menuAide, em);
 		this.add(menuFichier);
 		this.add(menuAide);
 	}
@@ -42,5 +45,13 @@ public class BarreMenu extends JMenuBar {
 		jI.setMnemonic(key);
 		jI.setAccelerator(KeyStroke.getKeyStroke(key, KeyEvent.CTRL_DOWN_MASK));
 		menu.add(jI);
+	}
+	
+	public void ecouter(JMenu menu, EcouteurMenu em) {
+		int compte = menu.getItemCount();
+		
+		for(int i = 0; i < compte; i++) {
+			menu.getItem(i).addActionListener(em);
+		}
 	}
 }

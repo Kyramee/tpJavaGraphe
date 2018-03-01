@@ -1,7 +1,13 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.io.Serializable;
 
-public abstract class Forme {
+public abstract class Forme implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private int x1, y1;
 	private Color contour, remplissage;
 	

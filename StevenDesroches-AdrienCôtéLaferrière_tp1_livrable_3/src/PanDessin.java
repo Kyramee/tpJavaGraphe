@@ -17,6 +17,8 @@ public class PanDessin extends JPanel implements MouseListener, MouseMotionListe
 	private Color Fg, Bg;
 	
 	private int formeCourante;
+	private boolean sauvegarder = true;
+	private String fileName = "";
 	
 	private MouseEvent premierClic;
 	
@@ -42,6 +44,31 @@ public class PanDessin extends JPanel implements MouseListener, MouseMotionListe
 	
 	public void setForme(int forme) {
 		this.formeCourante = forme;
+	}
+	
+	public ArrayList<Forme> getListeForme(){
+		return this.liste;
+	}
+	
+	public void setSaugarder(boolean b) {
+		this.sauvegarder = b;
+	}
+	
+	public void setFileName(String name) {
+		this.fileName = name;
+	}
+	
+	public boolean isSauvegarder() {
+		return this.sauvegarder;
+	}
+	
+	public String getFileName() {
+		return this.fileName;
+	}
+	
+	public void setListeForme(ArrayList<Forme> liste) {
+		this.liste = liste;
+		this.repaint();
 	}
 	
 	@Override
@@ -77,14 +104,19 @@ public class PanDessin extends JPanel implements MouseListener, MouseMotionListe
 		switch (this.formeCourante) {
 		case RECT:
 			this.liste.add(new Rectangle(e.getX(), e.getY(), this.Fg, this.Bg));
+			this.sauvegarder = false;
 			break;
 			
 		case OVAL:
 			this.liste.add(new Ovale(e.getX(), e.getY(), this.Fg, this.Bg));
+			this.sauvegarder = false;
 			break;
 			
 		case TRAIT:
 			this.liste.add(new Trait(e.getX(), e.getY(), this.Fg));
+			this.sauvegarder = false;
+			break;
+			
 		default:
 			break;
 		}

@@ -16,19 +16,19 @@ public class Paint extends JFrame {
 
 	public Paint() {
 		super("Paint");
-		setSize(800, 600);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setLocationRelativeTo(null);
+		this.setSize(800, 600);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setLocationRelativeTo(null);
 		
 		ImageIcon iconeFenetre = new ImageIcon("src/images/Logo.png");
-		setIconImage(iconeFenetre.getImage());
+		this.setIconImage(iconeFenetre.getImage());
 		
-		this.menuBar = new BarreMenu();
 		this.panelDessin = new PanDessin();
+		this.menuBar = new BarreMenu(this.panelDessin);
 		this.outilsBar = new OutilsBarre(this.panelDessin);
-		getContentPane().add( this.panelDessin );
-		setJMenuBar( this.menuBar );
-		add( this.outilsBar, BorderLayout.SOUTH );
+		this.getContentPane().add( this.panelDessin );
+		this.setJMenuBar( this.menuBar );
+		this.add( this.outilsBar, BorderLayout.SOUTH );
 	}
 	
 	public static void main(String[] args) {

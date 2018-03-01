@@ -13,13 +13,10 @@ public class OutilsBarre extends JToolBar {
 	private JToggleButton[] tabButtcouleurs = new JToggleButton[6], 
 			tabForme = new JToggleButton[3],
 			tabSceau = new JToggleButton[6];
-	
-	private PanDessin pd;
 
 	public OutilsBarre(PanDessin pd) {
 		super();
-		this.pd = pd;
-		insertionBoutons();
+		insertionBoutons(pd);
 	}
 	
 	public JToggleButton[] getTabJBcouleur() {
@@ -42,9 +39,9 @@ public class OutilsBarre extends JToolBar {
 		return this.groupCouleurTrait;
 	}
 
-	public void insertionBoutons() {
+	public void insertionBoutons(PanDessin pd) {
 		
-		EcouteurBoutton ecouteur = new EcouteurBoutton(this, this.pd);
+		EcouteurBoutton ecouteur = new EcouteurBoutton(this, pd);
 		
 		groupCouleurTrait = new ButtonGroup();
 		groupForme = new ButtonGroup();
