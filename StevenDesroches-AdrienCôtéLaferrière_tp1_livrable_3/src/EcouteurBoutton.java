@@ -1,4 +1,7 @@
+package ecouteur;
+
 import java.awt.Color;
+import graphique.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 

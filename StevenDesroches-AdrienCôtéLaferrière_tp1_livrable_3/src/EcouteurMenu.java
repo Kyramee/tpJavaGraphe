@@ -1,3 +1,5 @@
+package ecouteur;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileInputStream;
@@ -9,6 +11,8 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JOptionPane;
+
+import graphique.*;
 
 public class EcouteurMenu implements ActionListener {
 	private JMenu menuFichier;
