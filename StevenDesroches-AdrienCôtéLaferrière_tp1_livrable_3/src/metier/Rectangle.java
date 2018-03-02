@@ -1,7 +1,9 @@
 package metier;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 /**
  * Cette classe étend la classe Abstraite Forme ce qui lui permet d'utiliser les
@@ -31,10 +33,13 @@ public class Rectangle extends Forme {
 	 *            contient la couleur du contour.
 	 * @param remplissage
 	 *            contient la couleur du remplissage.
+	 * @param brush
+	 * 			  contient la taille du pinceau.
 	 */
-	public Rectangle( int x1, int y1, Color contour, Color remplissage ) {
+	public Rectangle( int x1, int y1, Color contour, Color remplissage, float brush ) {
 		super.setX1( x1 );
 		super.setY1( y1 );
+		this.setBrush( brush );
 		super.setContour( contour );
 		super.setRemplissage( remplissage );
 	}
@@ -53,8 +58,8 @@ public class Rectangle extends Forme {
 	 *            Variable servant à calculer la hauteur du rectangle.
 	 */
 	@Override
-	public void setParametre( int x1, int x2, int y1, int y2 ) {
-
+	public void setParametre( int x1, int x2, int y1, int y2) {
+		
 		if ( x1 > x2 ) {
 			super.setX1( x2 );
 			this.width = x1 - x2;
@@ -80,12 +85,14 @@ public class Rectangle extends Forme {
 	 */
 	@Override
 	public void tracer( Graphics g ) {
+		Graphics2D g2d = (Graphics2D)g;
+		g2d.setStroke( new BasicStroke(super.getBrush()) );
 		if ( super.getRemplissage() == Color.WHITE ) {
-			g.setColor( super.getContour() );
-			g.drawRect( super.getX1(), super.getY1(), this.width, this.height );
+			g2d.setColor( super.getContour() );
+			g2d.drawRect( super.getX1(), super.getY1(), this.width, this.height );
 		} else {
-			g.setColor( super.getRemplissage() );
-			g.fillRect( super.getX1(), super.getY1(), this.width, this.height );
+			g2d.setColor( super.getRemplissage() );
+			g2d.fillRect( super.getX1(), super.getY1(), this.width, this.height );
 		}
 	}
 

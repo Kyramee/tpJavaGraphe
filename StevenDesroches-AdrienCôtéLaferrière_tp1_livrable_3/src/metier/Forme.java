@@ -24,6 +24,8 @@ public abstract class Forme implements Serializable {
 	private Color contour;
 	/** Variable <code>Color</code> contenant la couleur d'un remplissage. */
 	private Color remplissage;
+	/** Variable <code>brush</code> contenant la taille du pinceau. */
+	private float brush;
 
 	/**
 	 * Méthode vide qui permet l'implantation des différentes coordonnées et
@@ -41,7 +43,7 @@ public abstract class Forme implements Serializable {
 	 *            C'est une variable utilisé pour calculer la hauteur de la
 	 *            forme
 	 */
-	public abstract void setParametre( int x1, int x2, int y1, int y2 );
+	public abstract void setParametre( int x1, int x2, int y1, int y2);
 
 	/**
 	 * Méthode vide qui permet l'implantation des variable qui déssine les
@@ -90,5 +92,15 @@ public abstract class Forme implements Serializable {
 	/** Méthode qui retourne la variable <code>remplissage</code> */
 	public Color getRemplissage() {
 		return this.remplissage;
+	}
+	
+	/** Méthode qui retourne la variable <code>brush</code> */
+	public float getBrush() {
+		return brush;
+	}
+	
+	/** Méthode qui définit la variable <code>brush</code> */
+	public void setBrush( float brush ) {
+		this.brush = brush;
 	}
 }

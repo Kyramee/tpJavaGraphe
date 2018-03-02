@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 
 import metier.*;
+import graphique.OutilsBarre;
 
 @SuppressWarnings("serial")
 public class PanDessin extends JPanel implements MouseListener, MouseMotionListener {
@@ -23,9 +24,9 @@ public class PanDessin extends JPanel implements MouseListener, MouseMotionListe
 	
 	private int formeCourante;
 	private boolean sauvegarder = true;
-	private String fileName = "";
-	
+	private String fileName = "";	
 	private MouseEvent premierClic;
+	private float brush;
 	
 	private ArrayList<Forme> liste;
 	
@@ -34,6 +35,7 @@ public class PanDessin extends JPanel implements MouseListener, MouseMotionListe
 		this.Bg = Color.WHITE;
 		this.formeCourante = AUCUN;
 		this.premierClic = null;
+		this.brush = 1.0f;
 		this.liste = new ArrayList<>();
 		this.addMouseListener(this);
 		this.addMouseMotionListener(this);
@@ -76,6 +78,10 @@ public class PanDessin extends JPanel implements MouseListener, MouseMotionListe
 		this.repaint();
 	}
 	
+	public void setBrush(float brush) {
+		this.brush = brush;
+	}
+	
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -108,22 +114,22 @@ public class PanDessin extends JPanel implements MouseListener, MouseMotionListe
 		
 		switch (this.formeCourante) {
 		case RECT:
-			this.liste.add(new Rectangle(e.getX(), e.getY(), this.Fg, this.Bg));
+			this.liste.add(new Rectangle(e.getX(), e.getY(), this.Fg, this.Bg, this.brush));
 			this.sauvegarder = false;
 			break;
 			
 		case OVAL:
-			this.liste.add(new Ovale(e.getX(), e.getY(), this.Fg, this.Bg));
+			this.liste.add(new Ovale(e.getX(), e.getY(), this.Fg, this.Bg, this.brush));
 			this.sauvegarder = false;
 			break;
 			
 		case TRAIT:
-			this.liste.add(new Trait(e.getX(), e.getY(), this.Fg));
+			this.liste.add(new Trait(e.getX(), e.getY(), this.Fg, this.brush));
 			this.sauvegarder = false;
 			break;
 		
 		case TRIANGLE:
-			this.liste.add(new Isocèle(e.getX(), e.getY(), this.Fg, this.Bg));
+			this.liste.add(new Isocèle(e.getX(), e.getY(), this.Fg, this.Bg, this.brush));
 		default:
 			break;
 		}
@@ -144,4 +150,5 @@ public class PanDessin extends JPanel implements MouseListener, MouseMotionListe
 	public void mouseExited(MouseEvent e) {
 		//Rien à voir ici
 	}
+
 }

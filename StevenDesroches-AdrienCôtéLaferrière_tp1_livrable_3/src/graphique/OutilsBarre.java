@@ -12,11 +12,13 @@ public class OutilsBarre extends JToolBar {
 	private static final long serialVersionUID = 1L;
 	private final String[] tabCouleur = { "bleu", "rouge", "vert", "noir", "gris", "rose" };
 	private final String[] tabNomForme = { "Carré", "Trait", "Ovale" ,"Triangle" };
+	private final String[] tabNomBrush = { "Petit", "Moyen", "Grand" };
 
-	private ButtonGroup groupCouleurTrait, groupCouleurRemplissage, groupForme;
+	private ButtonGroup groupCouleurTrait, groupCouleurRemplissage, groupForme, groupBrush;
 	private JToggleButton[] tabButtcouleurs = new JToggleButton[6], 
 			tabForme = new JToggleButton[4],
-			tabSceau = new JToggleButton[6];
+			tabSceau = new JToggleButton[6],
+			tabToggleBrush = new JToggleButton[3];
 
 	public OutilsBarre(PanDessin pd) {
 		super();
@@ -35,6 +37,10 @@ public class OutilsBarre extends JToolBar {
 		return this.tabSceau;
 	}
 	
+	public JToggleButton[] getTabBrush() {
+		return this.tabToggleBrush;
+	}
+	
 	public ButtonGroup getGroupFormeRemplissage() {
 		return this.groupCouleurRemplissage;
 	}
@@ -47,24 +53,15 @@ public class OutilsBarre extends JToolBar {
 		
 		EcouteurBoutton ecouteur = new EcouteurBoutton(this, pd);
 		
-		groupCouleurTrait = new ButtonGroup();
-		groupForme = new ButtonGroup();
-		groupCouleurRemplissage = new ButtonGroup();
+		this.groupCouleurTrait = new ButtonGroup();
+		this.groupForme = new ButtonGroup();
+		this.groupCouleurRemplissage = new ButtonGroup();
+		this.groupBrush = new ButtonGroup();
 
-		boucleTableau( groupCouleurTrait, tabButtcouleurs, "Trait", "vide", ecouteur);
-		boucleTableau( groupCouleurRemplissage, tabSceau, "sceau", "pleine", ecouteur);
-
-		for ( int i = 0; i < tabForme.length; i++ ) {
-			tabForme[i] = new JToggleButton( new ImageIcon( "src/images/" + tabNomForme[i] + ".png" ) );
-			tabForme[i].setToolTipText( tabNomForme[i] );
-			tabForme[i].addActionListener(ecouteur);
-		}
-		
-		for ( JToggleButton jToggleButton : tabForme ) {
-			groupForme.add( jToggleButton );
-			add( jToggleButton );
-		}
-
+		boucleTableau( this.groupCouleurTrait, this.tabButtcouleurs, "Trait", "vide", ecouteur);
+		boucleTableau( this.groupCouleurRemplissage, this.tabSceau, "sceau", "pleine", ecouteur);
+		boucleTableau(this.groupForme, this.tabForme, this.tabNomForme, ecouteur);
+		boucleTableau(this.groupBrush, this.tabToggleBrush, this.tabNomBrush, ecouteur);	
 	}
 
 	public void boucleTableau( ButtonGroup groupButton, JToggleButton[] groupeToggle, String nom, String type, EcouteurBoutton ecouteur ) {
@@ -73,8 +70,19 @@ public class OutilsBarre extends JToolBar {
 			groupeToggle[i].setToolTipText( "Forme " + type + " de couleur " + tabCouleur[i] );
 			groupeToggle[i].addActionListener(ecouteur);
 			groupButton.add( groupeToggle[i] );
-			add( groupeToggle[i] );
+			this.add( groupeToggle[i] );
 		}
-		addSeparator();
+		this.addSeparator();
+	}
+	
+	public void boucleTableau(ButtonGroup groupButton, JToggleButton[] groupToggle, String[] nom, EcouteurBoutton ecouteur) {
+		for ( int i = 0; i < groupToggle.length; i++ ) {
+			groupToggle[i] = new JToggleButton( new ImageIcon( "src/images/" + nom[i] + ".png" ) );
+			groupToggle[i].setToolTipText( nom[i] );
+			groupToggle[i].addActionListener(ecouteur);
+			groupButton.add(groupToggle[i]);
+			this.add(groupToggle[i]);
+		}
+		this.addSeparator();
 	}
 }

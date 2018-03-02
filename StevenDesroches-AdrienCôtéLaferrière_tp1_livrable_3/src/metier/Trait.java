@@ -1,7 +1,9 @@
 package metier;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 /**
  * Cette classe étend la classe Abstraite Forme ce qui lui permet d'utiliser les
@@ -25,10 +27,13 @@ public class Trait extends Forme {
 	 *            Coordonnée y du premier point.
 	 * @param contour
 	 *            Couleur du trait.
+	 * @param brush
+	 * 			  contient la taille du pinceau.
 	 */
-	public Trait( int x1, int y1, Color contour ) {
+	public Trait( int x1, int y1, Color contour, float brush ) {
 		super.setX1( x1 );
 		super.setY1( y1 );
+		super.setBrush(brush);
 		this.x2 = x1;
 		this.y2 = y1;
 		super.setContour( contour );
@@ -48,7 +53,7 @@ public class Trait extends Forme {
 	 *            Coordonnée y du deuxième point.
 	 */
 	@Override
-	public void setParametre( int x1, int x2, int y1, int y2 ) {
+	public void setParametre( int x1, int x2, int y1, int y2) {
 		this.x2 = x2;
 		this.y2 = y2;
 		super.setX1( x1 );
@@ -63,8 +68,10 @@ public class Trait extends Forme {
 	 */
 	@Override
 	public void tracer( Graphics g ) {
-		g.setColor( super.getContour() );
-		g.drawLine( super.getX1(), super.getY1(), this.x2, this.y2 );
+		Graphics2D g2d = (Graphics2D)g;
+		g2d.setStroke( new BasicStroke(super.getBrush()) );
+		g2d.setColor( super.getContour() );
+		g2d.drawLine( super.getX1(), super.getY1(), this.x2, this.y2 );
 		;
 	}
 }

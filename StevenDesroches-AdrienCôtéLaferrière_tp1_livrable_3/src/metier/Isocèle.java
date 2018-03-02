@@ -1,18 +1,21 @@
 package metier;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 public class Isocèle extends Forme {
 	private int[] xPoint = new int[3];
 	private int[] yPoint = new int[3];
 	
 
-	public Isocèle(int x1, int y1, Color contour, Color remplissage) {
+	public Isocèle(int x1, int y1, Color contour, Color remplissage, float brush) {
 		super.setX1(x1);
 		super.setY1(y1);
 		super.setContour(contour);
 		super.setRemplissage(remplissage);
+		super.setBrush(brush);
 		for (int i = 0; i < xPoint.length; i++) {
 			this.xPoint[i] = x1;
 			this.yPoint[i] = y1;
@@ -21,13 +24,14 @@ public class Isocèle extends Forme {
 
 	@Override
 	public void tracer(Graphics g) {
-		
+		Graphics2D g2d = (Graphics2D)g;
+		g2d.setStroke( new BasicStroke(super.getBrush()) );
 		if ( super.getRemplissage() == Color.WHITE ) {
-			g.setColor( super.getContour() );
-			g.drawPolygon(this.xPoint, this.yPoint, 3);
+			g2d.setColor( super.getContour() );
+			g2d.drawPolygon(this.xPoint, this.yPoint, 3);
 		} else {
-			g.setColor( super.getRemplissage() );
-			g.fillPolygon(this.xPoint, this.yPoint, 3);
+			g2d.setColor( super.getRemplissage() );
+			g2d.fillPolygon(this.xPoint, this.yPoint, 3);
 		}
 	}
 
@@ -44,5 +48,4 @@ public class Isocèle extends Forme {
 		}
 		this.yPoint[2] = y2;
 	}
-
 }

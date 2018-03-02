@@ -18,7 +18,7 @@ public class Paint extends JFrame {
 
 	public Paint() {
 		super("Paint");
-		this.setSize(800, 600);
+		this.setSize(820, 650);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		

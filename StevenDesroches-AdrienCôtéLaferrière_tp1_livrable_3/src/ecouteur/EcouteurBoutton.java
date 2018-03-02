@@ -10,7 +10,8 @@ import javax.swing.JToggleButton;
 public class EcouteurBoutton implements ActionListener {
 	private OutilsBarre ob;
 	private PanDessin pd;
-	private final Color[] tabColor = {Color.BLUE, Color.RED, Color.GREEN, Color.BLACK, Color.GRAY, Color.PINK};
+	private final Color[] tabColor = { Color.BLUE, Color.RED, Color.GREEN, Color.BLACK, Color.GRAY, Color.PINK };
+	private final float[] tabFloat = { 1.0f, 5.0f, 10.0f };
 
 	public EcouteurBoutton(OutilsBarre ob, PanDessin pd) {
 		this.ob = ob;
@@ -53,7 +54,16 @@ public class EcouteurBoutton implements ActionListener {
 				if (e.getSource() == tab[i]) {
 					this.pd.setForme(i);
 					go = false;
-
+					break;
+				}
+			}
+		}
+		
+		if (go) {
+			tab = ob.getTabBrush();
+			for (int i = 0; i < tab.length; i++) {
+				if(e.getSource() == tab[i]) {
+					this.pd.setBrush(this.tabFloat[i]);
 					break;
 				}
 			}
