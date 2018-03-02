@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 
 import metier.*;
+import graphique.OutilsBarre;
 
 @SuppressWarnings("serial")
 public class PanDessin extends JPanel implements MouseListener, MouseMotionListener {
@@ -86,7 +87,7 @@ public class PanDessin extends JPanel implements MouseListener, MouseMotionListe
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		if ( !this.liste.isEmpty() ) {
-			this.liste.get(this.liste.size() - 1).setParametre(this.premierClic.getX(), e.getX(), this.premierClic.getY(), e.getY());
+			this.liste.get(this.liste.size() - 1).setParametre(this.premierClic.getX(), e.getX(), this.premierClic.getY(), e.getY(), OutilsBarre.verification());
 			this.repaint();
 		}
 	}
@@ -141,4 +142,5 @@ public class PanDessin extends JPanel implements MouseListener, MouseMotionListe
 	public void mouseExited(MouseEvent e) {
 		//Rien à voir ici
 	}
+
 }

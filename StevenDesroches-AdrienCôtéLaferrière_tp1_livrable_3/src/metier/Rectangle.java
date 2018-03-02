@@ -1,7 +1,9 @@
 package metier;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 /**
  * Cette classe étend la classe Abstraite Forme ce qui lui permet d'utiliser les
@@ -53,8 +55,10 @@ public class Rectangle extends Forme {
 	 *            Variable servant à calculer la hauteur du rectangle.
 	 */
 	@Override
-	public void setParametre( int x1, int x2, int y1, int y2 ) {
+	public void setParametre( int x1, int x2, int y1, int y2, float brush) {
 
+		this.setBrush( brush );
+		
 		if ( x1 > x2 ) {
 			super.setX1( x2 );
 			this.width = x1 - x2;
@@ -80,6 +84,8 @@ public class Rectangle extends Forme {
 	 */
 	@Override
 	public void tracer( Graphics g ) {
+		Graphics2D g2d = (Graphics2D)g;
+		g2d.setStroke( new BasicStroke(getBrush()) );
 		if ( super.getRemplissage() == Color.WHITE ) {
 			g.setColor( super.getContour() );
 			g.drawRect( super.getX1(), super.getY1(), this.width, this.height );

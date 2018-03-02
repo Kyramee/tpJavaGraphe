@@ -13,10 +13,11 @@ public class OutilsBarre extends JToolBar {
 	private final String[] tabCouleur = { "bleu", "rouge", "vert", "noir", "gris", "rose" };
 	private final String[] tabNomForme = { "Carré", "Trait", "Ovale" };
 
-	private ButtonGroup groupCouleurTrait, groupCouleurRemplissage, groupForme;
+	private ButtonGroup groupCouleurTrait, groupCouleurRemplissage, groupForme, groupBrush;
 	private JToggleButton[] tabButtcouleurs = new JToggleButton[6], 
 			tabForme = new JToggleButton[3],
 			tabSceau = new JToggleButton[6];
+	private static JToggleButton[] tabToggleBrush = new JToggleButton[3];
 
 	public OutilsBarre(PanDessin pd) {
 		super();
@@ -50,6 +51,7 @@ public class OutilsBarre extends JToolBar {
 		groupCouleurTrait = new ButtonGroup();
 		groupForme = new ButtonGroup();
 		groupCouleurRemplissage = new ButtonGroup();
+		groupBrush = new ButtonGroup();
 
 		boucleTableau( groupCouleurTrait, tabButtcouleurs, "Trait", "vide", ecouteur);
 		boucleTableau( groupCouleurRemplissage, tabSceau, "sceau", "pleine", ecouteur);
@@ -65,6 +67,19 @@ public class OutilsBarre extends JToolBar {
 			add( jToggleButton );
 		}
 
+		addSeparator();
+		
+		groupBrush = new ButtonGroup();
+		tabToggleBrush[0] = new JToggleButton("Petit");
+		tabToggleBrush[1] = new JToggleButton("Moyen");
+		tabToggleBrush[2] = new JToggleButton("Grand");
+		
+		for ( int i = 0; i < tabToggleBrush.length; i++ ) {
+			groupBrush.add( tabToggleBrush[i] );
+			add(tabToggleBrush[i]);
+		}
+		
+		
 	}
 
 	public void boucleTableau( ButtonGroup groupButton, JToggleButton[] groupeToggle, String nom, String type, EcouteurBoutton ecouteur ) {
@@ -76,5 +91,18 @@ public class OutilsBarre extends JToolBar {
 			add( groupeToggle[i] );
 		}
 		addSeparator();
+	}
+	
+	public static float verification() {
+		float valeur;
+		if ( tabToggleBrush[2].isSelected() ) {
+			valeur = 10.0f;
+		} else if ( tabToggleBrush[1].isSelected() ) {
+			valeur = 5.0f;
+		} else {
+			valeur = 1.0f;
+		}
+		
+		return valeur;
 	}
 }

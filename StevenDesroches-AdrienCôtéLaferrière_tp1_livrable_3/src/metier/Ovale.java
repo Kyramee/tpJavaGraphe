@@ -1,7 +1,9 @@
 package metier;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 /**
  * Cette classe étend la classe Rectangle ce qui lui permet d'utiliser le
@@ -40,6 +42,8 @@ public class Ovale extends Rectangle {
 	 */
 	@Override
 	public void tracer( Graphics g ) {
+		Graphics2D g2d = (Graphics2D)g;
+		g2d.setStroke( new BasicStroke(getBrush()) );
 		if ( super.getRemplissage() == Color.WHITE ) {
 			g.setColor( super.getContour() );
 			g.drawOval( super.getX1(), super.getY1(), super.getWidth(), super.getHeight() );
