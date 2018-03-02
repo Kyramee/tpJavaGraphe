@@ -11,11 +11,11 @@ public class OutilsBarre extends JToolBar {
 
 	private static final long serialVersionUID = 1L;
 	private final String[] tabCouleur = { "bleu", "rouge", "vert", "noir", "gris", "rose" };
-	private final String[] tabNomForme = { "Carré", "Trait", "Ovale" };
+	private final String[] tabNomForme = { "Carré", "Trait", "Ovale" ,"Triangle" };
 
 	private ButtonGroup groupCouleurTrait, groupCouleurRemplissage, groupForme;
 	private JToggleButton[] tabButtcouleurs = new JToggleButton[6], 
-			tabForme = new JToggleButton[3],
+			tabForme = new JToggleButton[4],
 			tabSceau = new JToggleButton[6];
 
 	public OutilsBarre(PanDessin pd) {

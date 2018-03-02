@@ -16,7 +16,8 @@ public class PanDessin extends JPanel implements MouseListener, MouseMotionListe
 	static final int TRAIT = 1;
 	static final int RECT = 0;
 	static final int OVAL = 2;
-	static final int AUCUN = 3;
+	static final int TRIANGLE = 3;
+	static final int AUCUN = 4;
 	
 	private Color Fg, Bg;
 	
@@ -120,7 +121,9 @@ public class PanDessin extends JPanel implements MouseListener, MouseMotionListe
 			this.liste.add(new Trait(e.getX(), e.getY(), this.Fg));
 			this.sauvegarder = false;
 			break;
-			
+		
+		case TRIANGLE:
+			this.liste.add(new Isocèle(e.getX(), e.getY(), this.Fg, this.Bg));
 		default:
 			break;
 		}
